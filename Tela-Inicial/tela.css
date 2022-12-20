@@ -1,0 +1,16 @@
+body {
+  max-width: 100vw;
+  background-image: url("../Assets/Sem\ título.png");
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 10px auto;
+  color: #d9d9d9;
+}
