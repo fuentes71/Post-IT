@@ -125,7 +125,7 @@ function cadastrar() {
     sucesso.innerHTML = "<strong>Cadastrando usuário...</strong>";
     error.innerHTML = "";
     setTimeout(() => {
-      window.location.href = "/projeto-final/";
+      window.location.href = "../";
     }, 1000);
   } else {
     error.setAttribute("style", "display:block");
