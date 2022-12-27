@@ -105,3 +105,22 @@ hr {
   cursor: pointer;
   color: #482b82;
 }
+
+#error {
+  display: none;
+  text-align: center;
+  color: #ff0000;
+  background-color: #ffbbbb;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+#sucesso {
+  display: none;
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  color: #00bb00;
+  background-color: #bbffbe;
+}

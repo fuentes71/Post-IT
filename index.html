@@ -17,20 +17,20 @@
 
     <section class="container-form">
       <h1>Post-IT</h1>
+      <span id="error"></span>
       <form action="">
         <div class="label-float">
           <input type="text" id="usuario" required>
-          <label for="usuario">usuario</label>
+          <label id='labelUser' for="usuario">usuario</label>
         </div>
         <div class="label-float">
           <input type="password" id="senha" required>
-          <label for="senha">Senha</label>
+          <label id='labelSenha' for="senha">Senha</label>
           <i class="fa fa-eye" aria-hidden="true"></i>
-          <!-- <i class="fa fa-eye-slash active" aria-hidden="true"></i> -->
-
         </div>
       </form>
-      <button><a href="./Tela-Inicial/tela.html">Entrar</a></button>
+      <button onclick="login()">Entrar</button>
+
       <hr>
       <span>
         <p>Ainda não se cadastrou? <a href="./Cadastro/cadastro.html"> Cadastre-se</a></p>
@@ -38,6 +38,7 @@
     </section>
   </main>
   <script src="./index.js"></script>
+  <script src="./Login/login.js"></script>
 </body>
 
 </html>
