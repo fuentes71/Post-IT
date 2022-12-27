@@ -125,7 +125,7 @@ function cadastrar() {
     sucesso.innerHTML = "<strong>Cadastrando usuário...</strong>";
     error.innerHTML = "";
     setTimeout(() => {
-      window.location.href = "Post-IT/";
+      window.location.href = "https://fuentes71.github.io/Post-IT/";
     }, 1000);
   } else {
     error.setAttribute("style", "display:block");
