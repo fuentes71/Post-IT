@@ -97,7 +97,8 @@ hr {
 .container-form p a {
   text-decoration: none;
 }
-.fa-eye {
+.fa-eye,
+.fa-eye-slash {
   position: absolute;
   top: 15px;
   right: 0px;

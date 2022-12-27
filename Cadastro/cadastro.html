@@ -15,11 +15,16 @@
   <main class="main">
     <section class="container-form">
       <h1>Post-IT</h1>
+      <span id="sucesso"></span>
+      <span id="error"></span>
       <form action="">
+        <div class="label-float">
+          <input required type="text" name="nome" id="nome">
+          <label for='nome' id="labelNome">Nome</label>
+        </div>
         <div class="label-float">
           <input required type="text" name="usuario" id="usuario">
           <label for='usuario' id="labelUsuario">usuario</label>
-
         </div>
         <div class="label-float">
           <input type="password" id="senha" required>
@@ -32,7 +37,6 @@
           <label for="confirmarSenha" id="labelConfirmarSenha">Confirmar Senha</label>
           <i id='verConfirmarSenha' class="fa fa-eye" aria-hidden="true"></i>
         </div>
-
       </form>
       <button onclick="cadastrar()">Cadastrar</button>
       </div>
