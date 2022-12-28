@@ -22,7 +22,7 @@ function login() {
         nome: item.nome,
         usuario: item.usuario,
         senha: item.senha,
-        post: {},
+        post: [],
       };
     }
   });

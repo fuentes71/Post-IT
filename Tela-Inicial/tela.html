@@ -7,27 +7,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="tela.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Post It | Inicial</title>
 </head>
 
 <body class="body">
   <main class="main">
-    <section class="section">
+    <nav>
+      <h1 id="logado"></h1>
+      <button onclick="sair()">Sair</button>
+    </nav>
+    <section class="container-text">
       <div>
-        <h1 id="logado"></h1>
-        <button onclick="sair()">Sair</button>
+        <h2>Post-IT</h2>
+        <button id="btnDeleteAll"><i class="fa fa-trash"></i></button>
       </div>
-      <h1>Recados</h1>
+      <hr>
+    </section>
+    <section class="container-form">
       <form action="">
-        <input type="text" id="descricao" placeholder="Descrição">
-        <input type="text" id="detalhe" placeholder="Detalhamento">
+        <div class="label-float">
+          <input type="text" id="tarefa" required>
+          <label id='labelTarefa' for="tarefa">Tarefa</label>
+        </div>
+        <!-- <div class="label-float">
+          <input type="text" id="detalhe" required>
+          <label id='labelDetalhe' for="detalhe">Detalhamento</label>
+        </div> -->
       </form>
-      <button id="btnSalvar">Salvar</button>
+      <button id="btnInsert">+</button>
     </section>
-    <hr>
-    <section>
+    <section class="container-list">
+      <ul></ul>
+    </section>
 
-    </section>
   </main>
   <script src="./tela.js"></script>
 </body>

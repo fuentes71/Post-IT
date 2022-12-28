@@ -21,11 +21,6 @@
   text-shadow: #482b8260 3px 3px;
   line-height: 2px;
 }
-.container-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
 p {
   color: #482b82;
