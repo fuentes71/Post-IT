@@ -41,19 +41,8 @@
       <button id="btnInserir">+</button>
       <button id="btnSalvarEditado">Salvar</button>
     </section>
-    <section class="container-list">
-      <div class="divLi">
-        <input type="checkbox" ${status} data-i=${i} onchange="done()" />
-        <div>1</div>
-        <span data-si=${i}>Tarefa</span>
-        <div class="divButton">
-
-          <button onclick="editar()" data-i=${i}><i class="fa fa-pencil"></i></i></button> |
-          <button onclick="removeItem()" data-i=${i}><i class="fa fa-trash"></i></i></button>
-        </div>
-      </div>
+    <section id="container-list" class="container-list">
       <ul>
-
       </ul>
     </section>
   </main>

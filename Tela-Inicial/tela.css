@@ -64,20 +64,7 @@ hr {
   align-items: center;
   box-shadow: #00000060 3px 3px 1px 0px;
 }
-.container-list {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: calc(30vh);
-  background-color: #ffffff60;
-  padding: 5px 60px;
-  gap: 20px;
-  border: 1px solid #7e8ddb;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
-  box-shadow: #00000060 3px 3px 1px 0px;
-}
+
 form {
   display: flex;
   flex-direction: row;
@@ -91,31 +78,57 @@ form {
   width: 20%;
 }
 .container-list {
-  display: grid;
+  display: none;
   margin-top: 10px;
+  width: 20%;
   position: absolute;
+  background-color: #ffffff60;
+  /* padding: 5px 60px; */
+  gap: 20px;
+  border: 1px solid #7e8ddb;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: #00000060 3px 3px 1px 0px;
   top: calc(35vh + 10px);
 }
+
 .divLi {
-  display: flex;
+  display: grid;
+  grid-template-rows: 4fr;
   align-items: center;
   margin-top: 5px;
-  padding: 10px 120px;
+  padding: 15px 120px;
   gap: 20px;
   /* background-color: #ffffff60; */
-  border-top: 1px solid #7e8ddb;
+  /* border-top: 1px solid #7e8ddb; */
   border-bottom: 1px solid #7e8ddb;
   /* border-radius: 20px; */
   /* box-shadow: #00000060 3px 3px 1px 0px; */
 }
+ul {
+  width: 150%;
+  position: relative;
+  left: -60px;
+  margin-bottom: 10px;
+  /* background-color: red; */
+}
+li:nth-child(even) {
+  width: 100%;
+  background-color: #33333340;
+}
 .divLi span {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  left: 60px;
+  position: absolute;
   width: 90%;
   color: #120457;
 }
-div {
-  color: #120457;
-}
+
 .divLi input {
+  display: block;
   width: 10%;
   border-radius: 100%;
   outline: none;
@@ -123,7 +136,14 @@ div {
   left: 20px;
   accent-color: currentcolor;
 }
-
+.divLi button {
+  padding: 4px 10px;
+}
+.divButton {
+  display: block;
+  position: absolute;
+  right: 20px;
+}
 .fa-pencil,
 .fa-trash {
   font-size: 16px;
@@ -132,7 +152,11 @@ div {
 .fa-pencil {
   color: #00bb00;
 }
-
+#btnSalvarEditado {
+  display: none;
+  padding: 5px 8px;
+  margin-left: 0;
+}
 #btnSalvarEditado:hover {
   background-color: #00bb0075;
 }
@@ -142,7 +166,4 @@ li {
 
 .line-through {
   text-decoration: line-through;
-}
-#btnSalvarEditado {
-  display: none;
 }

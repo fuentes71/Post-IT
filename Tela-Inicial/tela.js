@@ -8,6 +8,7 @@ let btnEdit = document.querySelector("#btnEdit");
 let btnDeleteAll = document.querySelector("#btnDeleteAll");
 let janelaEdicao = document.querySelector("#janelaEdicao");
 let ul = document.querySelector("ul");
+let containerList = document.querySelector("#container-list");
 let user = userLogado.post;
 let index;
 logado.innerHTML = `Bem-vindo ${userLogado.nome}`;
@@ -53,7 +54,11 @@ btnInserir.onclick = () => {
     setItensDB();
   }
 };
-
+function display() {
+  if (userLogado.post.length > 0)
+    containerList.setAttribute("style", "display:grid");
+  else containerList.setAttribute("style", "display:none");
+}
 function setItensDB() {
   if (userLogado.post.length >= 10) {
     alert("Limite máximo de 10 itens atingido!");
@@ -70,7 +75,6 @@ function updateDB() {
   localStorage.setItem("userLogado", JSON.stringify(userLogado));
 
   atualizaUsuario();
-
   loadItens();
 }
 function loadItens() {
@@ -79,7 +83,9 @@ function loadItens() {
     if (user.usuario == userLogado.usuario) {
       userLogado.post = user.post;
     }
+    display();
   });
+
   userLogado.post.forEach((item, i) => {
     insertItemTela(item.tarefa, item.status, i);
   });
@@ -90,10 +96,11 @@ function insertItemTela(tarefa, status, i) {
 
   li.innerHTML = `<div class="divLi">
       <input type="checkbox" ${status} data-i=${i} onchange="done(this, ${i});" />
-      <div>${i + 1}</div>
-      <span data-si=${i}> ${tarefa}</span>
-      <button onclick="editar(${i})" data-i=${i}><i class="fa fa-pencil"></i></i></button> |
-      <button onclick="removeItem(${i})" data-i=${i}><i class="fa fa-trash"></i></i></button>
+      <span data-si=${i}>${i + 1} | ${tarefa}</span>
+      <div class="divButton">
+        <button onclick="editar(${i})" data-i=${i}><i class="fa fa-pencil"></i></i></button> |
+        <button onclick="removeItem(${i})" data-i=${i}><i class="fa fa-trash"></i></i></button>
+      </div>
     </div>`;
   ul.appendChild(li);
   if (status) {
