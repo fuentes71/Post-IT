@@ -64,6 +64,20 @@ hr {
   align-items: center;
   box-shadow: #00000060 3px 3px 1px 0px;
 }
+.container-list {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: calc(30vh);
+  background-color: #ffffff60;
+  padding: 5px 60px;
+  gap: 20px;
+  border: 1px solid #7e8ddb;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: #00000060 3px 3px 1px 0px;
+}
 form {
   display: flex;
   flex-direction: row;
@@ -77,20 +91,22 @@ form {
   width: 20%;
 }
 .container-list {
-  display: block;
+  display: grid;
+  margin-top: 10px;
   position: absolute;
   top: calc(35vh + 10px);
 }
 .divLi {
   display: flex;
   align-items: center;
-  margin-top: 20px;
-  padding: 10px 90px;
+  margin-top: 5px;
+  padding: 10px 120px;
   gap: 20px;
-  background-color: #ffffff60;
-  border: 1px solid #7e8ddb;
-  border-radius: 20px;
-  box-shadow: #00000060 3px 3px 1px 0px;
+  /* background-color: #ffffff60; */
+  border-top: 1px solid #7e8ddb;
+  border-bottom: 1px solid #7e8ddb;
+  /* border-radius: 20px; */
+  /* box-shadow: #00000060 3px 3px 1px 0px; */
 }
 .divLi span {
   width: 90%;
@@ -108,15 +124,25 @@ div {
   accent-color: currentcolor;
 }
 
-.divLi i {
+.fa-pencil,
+.fa-trash {
   font-size: 16px;
   color: brown;
 }
+.fa-pencil {
+  color: #00bb00;
+}
 
+#btnSalvarEditado:hover {
+  background-color: #00bb0075;
+}
 li {
   list-style-type: none;
 }
 
 .line-through {
   text-decoration: line-through;
+}
+#btnSalvarEditado {
+  display: none;
 }

@@ -12,11 +12,14 @@
 </head>
 
 <body class="body">
-  <main class="main">
+  <header>
     <nav>
       <h1 id="logado"></h1>
       <button onclick="sair()">Sair</button>
+
     </nav>
+  </header>
+  <main class="main">
     <section class="container-text">
       <div>
         <h2>Post-IT</h2>
@@ -35,12 +38,24 @@
           <label id='labelDetalhe' for="detalhe">Detalhamento</label>
         </div> -->
       </form>
-      <button id="btnInsert">+</button>
+      <button id="btnInserir">+</button>
+      <button id="btnSalvarEditado">Salvar</button>
     </section>
     <section class="container-list">
-      <ul></ul>
-    </section>
+      <div class="divLi">
+        <input type="checkbox" ${status} data-i=${i} onchange="done()" />
+        <div>1</div>
+        <span data-si=${i}>Tarefa</span>
+        <div class="divButton">
 
+          <button onclick="editar()" data-i=${i}><i class="fa fa-pencil"></i></i></button> |
+          <button onclick="removeItem()" data-i=${i}><i class="fa fa-trash"></i></i></button>
+        </div>
+      </div>
+      <ul>
+
+      </ul>
+    </section>
   </main>
   <script src="./tela.js"></script>
 </body>
