@@ -7,6 +7,8 @@ let btnInserir = document.querySelector("#btnInserir");
 let btnEdit = document.querySelector("#btnEdit");
 let btnDeleteAll = document.querySelector("#btnDeleteAll");
 let janelaEdicao = document.querySelector("#janelaEdicao");
+let carregando = document.querySelector("#carregando");
+let carregado = document.querySelector("#carregado");
 let ul = document.querySelector("ul");
 let containerList = document.querySelector("#container-list");
 let user = userLogado.post;
@@ -29,11 +31,13 @@ function sair() {
 //   }
 // });
 
-// tarefa.addEventListener("keypress", (e) => {
-//   if (e.key == "Enter" && tarefa.value !== "") {
-//     setItensDB();
-//   }
-// });
+tarefa.addEventListener("keypress", (e) => {
+  if (e.key == "Enter" && tarefa.value !== "") {
+    e.preventDefault();
+    setItensDB();
+    tarefa.value = "";
+  }
+});
 btnDeleteAll.onclick = () => {
   let user = userLogado.post;
   if (user.length != 0) {
@@ -52,6 +56,7 @@ btnDeleteAll.onclick = () => {
 btnInserir.onclick = () => {
   if (tarefa.value !== "") {
     setItensDB();
+    tarefa.value = "";
   }
 };
 function display() {
@@ -145,9 +150,6 @@ function removeItem(i) {
   updateDB();
 }
 function atualizaUsuario() {
-  // for (let i = 0; i < listaUser.length; i++) {
-  //   console.log(listaUser[i]);
-  // }
   listaUser.forEach((user) => {
     if (user.usuario == userLogado.usuario) {
       user.post = userLogado.post;
@@ -156,6 +158,13 @@ function atualizaUsuario() {
     }
   });
 }
+function loading() {
+  carregando.setAttribute("style", "display:none");
+  carregado.setAttribute("style", "display:block");
+}
 setTimeout(() => {
   loadItens();
 });
+setTimeout(() => {
+  loading();
+}, 1000);

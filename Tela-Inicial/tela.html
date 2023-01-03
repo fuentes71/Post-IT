@@ -11,41 +11,46 @@
   <title>Post It | Inicial</title>
 </head>
 
-<body class="body">
-  <header>
-    <nav>
-      <h1 id="logado"></h1>
-      <button onclick="sair()">Sair</button>
 
-    </nav>
-  </header>
-  <main class="main">
-    <section class="container-text">
-      <div>
-        <h2>Post-IT</h2>
-        <button id="btnDeleteAll"><i class="fa fa-trash"></i></button>
-      </div>
-      <hr>
-    </section>
-    <section class="container-form">
-      <form action="">
-        <div class="label-float">
-          <input type="text" id="tarefa" required>
-          <label id='labelTarefa' for="tarefa">Tarefa</label>
+<body class="body">
+  <div id="carregando">
+    <p>
+      Loading
+    </p>
+    <span></span>
+  </div>
+  <div id="carregado">
+    <header>
+      <nav>
+        <h1 id="logado"></h1>
+        <button onclick="sair()">Sair</button>
+      </nav>
+    </header>
+    <main class="main">
+      <section class="container-text">
+        <div>
+          <h2>Post-IT</h2>
+          <button id="btnDeleteAll"><i class="fa fa-trash"></i></button>
         </div>
-        <!-- <div class="label-float">
-          <input type="text" id="detalhe" required>
-          <label id='labelDetalhe' for="detalhe">Detalhamento</label>
-        </div> -->
-      </form>
-      <button id="btnInserir">+</button>
-      <button id="btnSalvarEditado">Salvar</button>
-    </section>
-    <section id="container-list" class="container-list">
-      <ul>
-      </ul>
-    </section>
-  </main>
+        <hr>
+      </section>
+      <section class="container-form">
+        <form action="">
+          <div class="label-float">
+            <input type="text" id="tarefa" required>
+            <label id='labelTarefa' for="tarefa">Tarefa</label>
+          </div>
+        </form>
+        <button id="btnInserir">+</button>
+        <button id="btnSalvarEditado">Salvar</button>
+      </section>
+      <section id="container-list" class="container-list">
+        <ul>
+        </ul>
+      </section>
+    </main>
+  </div>
+
   <script src="./tela.js"></script>
 </body>
 
