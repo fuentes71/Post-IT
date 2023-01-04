@@ -113,25 +113,54 @@ function cadastrar() {
     valid.usuario.validUsuario
   ) {
     let listaUser = JSON.parse(localStorage.getItem("listaUser") || "[]");
-    listaUser.push({
-      nome: nome.value,
-      usuario: usuario.value,
-      senha: senha.value,
-      post: [],
+    let verificar = true;
+    listaUser.forEach((user) => {
+      if (user.usuario == usuario.value) return (verificar = false);
     });
-
-    localStorage.setItem("listaUser", JSON.stringify(listaUser));
-    sucesso.setAttribute("style", "display:block");
-    error.setAttribute("style", "display:none");
-    sucesso.innerHTML = "<strong>Cadastrando usuário...</strong>";
-    error.innerHTML = "";
-    setTimeout(() => {
-      window.location.href = "../";
-    }, 1000);
+    console.log(verificar);
+    if (verificar) {
+      sucess(listaUser);
+    } else {
+      usuarioExiste();
+    }
   } else {
-    error.setAttribute("style", "display:block");
-    sucesso.setAttribute("style", "display:none");
-    error.innerHTML = "<strong>Preencha todos os campos corretamente!</strong>";
-    sucesso.innerHTML = "";
+    campoVazio();
   }
+}
+
+function usuarioExiste() {
+  error.setAttribute("style", "display:block");
+  sucesso.setAttribute("style", "display:none");
+  error.innerHTML = "<strong>Usuario já existente!</strong>";
+  sucesso.innerHTML = "";
+  setTimeout(() => {
+    error.setAttribute("style", "display:none");
+    error.innerHTML = "";
+  }, 1000);
+}
+function sucess(listaUser) {
+  listaUser.push({
+    nome: nome.value,
+    usuario: usuario.value,
+    senha: senha.value,
+    post: [],
+  });
+  localStorage.setItem("listaUser", JSON.stringify(listaUser));
+  sucesso.setAttribute("style", "display:block");
+  error.setAttribute("style", "display:none");
+  sucesso.innerHTML = "<strong>Cadastrando usuário...</strong>";
+  error.innerHTML = "";
+  setTimeout(() => {
+    window.location.href = "../";
+  }, 1000);
+}
+function campoVazio() {
+  error.setAttribute("style", "display:block");
+  sucesso.setAttribute("style", "display:none");
+  error.innerHTML = "<strong>Preencha todos os campos corretamente!</strong>";
+  sucesso.innerHTML = "";
+  setTimeout(() => {
+    error.setAttribute("style", "display:none");
+    error.innerHTML = "";
+  }, 1000);
 }
