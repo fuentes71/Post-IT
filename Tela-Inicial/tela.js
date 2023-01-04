@@ -57,6 +57,7 @@ btnInserir.onclick = () => {
   if (tarefa.value !== "") {
     setItensDB();
     tarefa.value = "";
+    tarefa.focus();
   }
 };
 function display() {

@@ -2,7 +2,6 @@ let usuario = document.querySelector("#usuario");
 let nome = document.querySelector("#nome");
 let senha = document.querySelector("#senha");
 let confirmarSenha = document.querySelector("#confirmarSenha");
-
 let labelUsuario = document.querySelector("#labelUsuario");
 let labelNome = document.querySelector("#labelNome");
 let labelSenha = document.querySelector("#labelSenha");
@@ -11,6 +10,10 @@ let btnSenha = document.querySelector("#verSenha");
 let btnConfirmarSenha = document.querySelector("#verConfirmarSenha");
 let error = document.querySelector("#error");
 let sucesso = document.querySelector("#sucesso");
+let voltar = document.querySelector("#voltar");
+
+voltar.onclick = () => (window.location.href = "../");
+
 let valid = {
   nome: { validNome: false },
   senha: { validSenha: false },
@@ -68,7 +71,6 @@ confirmarSenha.addEventListener("keyup", () => {
     confirmarSenha.setAttribute("style", "border-color: green");
     labelConfirmarSenha.innerHTML = "Confirmar Senha";
     valid.confirmarSenha.validConfirmarSenha = true;
-    console.log(valid.confirmarSenha.validConfirmarSenha);
   }
 });
 
@@ -117,7 +119,6 @@ function cadastrar() {
     listaUser.forEach((user) => {
       if (user.usuario == usuario.value) return (verificar = false);
     });
-    console.log(verificar);
     if (verificar) {
       sucess(listaUser);
     } else {
