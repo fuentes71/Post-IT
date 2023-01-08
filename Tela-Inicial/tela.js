@@ -18,7 +18,11 @@ let ativos = document.querySelector("#ativos");
 let completos = document.querySelector("#completos");
 let divLi = document.querySelector(".divLi");
 let itemLista = document.querySelector("#itemLista");
+let retornar = document.querySelector("#retornar");
+let retornarTudo = document.querySelector("#retornarTudo");
+let avancar = document.querySelector("#avancar");
 let user = userLogado.post;
+let paginate = 1;
 let index;
 let filtro;
 logado.innerHTML = `Bem-vindo ${userLogado.nome}`;
@@ -35,21 +39,12 @@ function sair() {
 descricao.addEventListener("keydown", (e) => {
   if (descricao.value.length < 50) {
     textoLenght(e, spanDescricao, descricao.value.length, 50);
-
-    if (e.key == "Enter" && descricao.value !== "" && tarefa.value !== "") {
-      e.preventDefault();
-      inputTarefa();
-    }
   }
 });
 
 tarefa.addEventListener("keydown", (e) => {
   if (tarefa.value.length < 25) {
     textoLenght(e, spanTarefa, tarefa.value.length, 25);
-    if (e.key == "Enter" && descricao.value !== "" && tarefa.value !== "") {
-      e.preventDefault();
-      inputTarefa();
-    }
   }
 });
 btnInserir.onclick = () => {
@@ -74,7 +69,8 @@ btnDeleteAll.onclick = () => {
 };
 
 function itensLista() {
-  itemLista.innerHTML = `${userLogado.post.length}/10`;
+  paginacao.innerHTML = paginate;
+  itemLista.innerHTML = `${userLogado.post.length}/30 Itens`;
 }
 function textoLenght(e, span, length, number) {
   if (e.code !== "Backspace") {
@@ -95,7 +91,7 @@ function display() {
   else containerList.setAttribute("style", "display:none");
 }
 function setItensDB() {
-  if (userLogado.post.length >= 10) {
+  if (userLogado.post.length >= 30) {
     alert("Limite máximo de 10 itens atingido!");
     return;
   }
@@ -121,7 +117,21 @@ completos.onclick = () => {
   filtro = 2;
   loadItens();
 };
-
+function verificarPaginacao() {
+  if (userLogado.post.length == 0) {
+    userLogado.paginate = 1;
+  }
+  if (userLogado.paginate == 1) {
+    if (userLogado.post.length > 10) userLogado.paginate += 1;
+  }
+  if (userLogado.paginate == 2) {
+    if (userLogado.post.length > 20) userLogado.paginate += 1;
+    if (userLogado.post.length < 10) userLogado.paginate -= 1;
+  }
+  if (userLogado.paginate == 3) {
+    if (userLogado.post.length < 20) userLogado.paginate -= 1;
+  }
+}
 function estiloFooter(add, remove1, remove2) {
   add.classList.add("on");
   remove1.classList.remove("on");
@@ -133,6 +143,9 @@ function updateDB() {
   loadItens();
 }
 function loadItens() {
+  verificarPaginacao();
+  loadpag();
+
   ul.innerHTML = "";
   listaUser.forEach((user) => {
     if (user.usuario == userLogado.usuario) {
@@ -141,29 +154,123 @@ function loadItens() {
     display();
     itensLista();
   });
-
   userLogado.post.forEach((item, i) => {
-    switch (filtro) {
+    switch (paginate) {
       case 1:
-        console.log(filtro);
-        if (item.status === "") {
-          insertItemTela(item.tarefa, item.descricao, item.status, i);
+        if (i < 10) {
+          switch (filtro) {
+            case 1:
+              if (item.status === "") {
+                insertItemTela(item.tarefa, item.descricao, item.status, i);
+              }
+              break;
+            case 2:
+              if (item.status === "checked") {
+                insertItemTela(item.tarefa, item.descricao, item.status, i);
+              }
+              break;
+            default:
+              insertItemTela(item.tarefa, item.descricao, item.status, i);
+              break;
+          }
+        } else {
+          return;
         }
         break;
       case 2:
-        console.log(filtro);
-        if (item.status === "checked") {
-          insertItemTela(item.tarefa, item.descricao, item.status, i);
+        if (i > 9 && i < 20) {
+          switch (filtro) {
+            case 1:
+              if (item.status === "") {
+                insertItemTela(item.tarefa, item.descricao, item.status, i);
+              }
+              break;
+            case 2:
+              if (item.status === "checked") {
+                insertItemTela(item.tarefa, item.descricao, item.status, i);
+              }
+              break;
+            default:
+              insertItemTela(item.tarefa, item.descricao, item.status, i);
+              break;
+          }
+        } else {
+          return;
         }
         break;
+      case 3:
+        if (i > 19 && i < 30) {
+          switch (filtro) {
+            case 1:
+              if (item.status === "") {
+                insertItemTela(item.tarefa, item.descricao, item.status, i);
+              }
+              break;
+            case 2:
+              if (item.status === "checked") {
+                insertItemTela(item.tarefa, item.descricao, item.status, i);
+              }
+              break;
+            default:
+              insertItemTela(item.tarefa, item.descricao, item.status, i);
+              break;
+          }
+        } else {
+          return;
+        }
+        break;
+
       default:
-        console.log(filtro);
-        insertItemTela(item.tarefa, item.descricao, item.status, i);
         break;
     }
   });
 }
+retornar.onclick = () => {
+  paginate -= 1;
+  loadpag();
+  loadItens();
+};
+retornarTudo.onclick = () => {
+  paginate = 1;
+  loadpag();
+  loadItens();
+};
 
+avancar.onclick = () => {
+  paginate += 1;
+  loadpag();
+  loadItens();
+};
+avancarTudo.onclick = () => {
+  paginate = userLogado.paginate;
+  loadpag();
+  loadItens();
+};
+
+function loadpag() {
+  console.log(userLogado.paginate);
+  if (userLogado.paginate > 1) {
+    if (paginate === 1) {
+      retornar.setAttribute("style", "display:none");
+      retornarTudo.setAttribute("style", "display:none");
+      avancar.setAttribute("style", "display:block");
+      avancarTudo.setAttribute("style", "display:block");
+    } else if (paginate === userLogado.paginate) {
+      retornar.setAttribute("style", "display:block");
+      retornarTudo.setAttribute("style", "display:block");
+      avancar.setAttribute("style", "display:none");
+      avancarTudo.setAttribute("style", "display:none");
+    } else {
+      avancar.setAttribute("style", "display:block");
+      avancarTudo.setAttribute("style", "display:block");
+    }
+  } else {
+    retornar.setAttribute("style", "display:none");
+    retornarTudo.setAttribute("style", "display:none");
+    avancar.setAttribute("style", "display:none");
+    avancarTudo.setAttribute("style", "display:none");
+  }
+}
 function insertItemTela(tarefa, descricao, status, i) {
   const li = document.createElement("li");
 
@@ -205,6 +312,7 @@ function editar(i) {
   btnInserir.setAttribute("style", "display:none");
   btnSalvarEditado.setAttribute("style", "display:block");
   tarefa.value = userLogado.post[i].tarefa;
+
   descricao.value = userLogado.post[i].descricao;
   tarefa.focus();
   index = i;

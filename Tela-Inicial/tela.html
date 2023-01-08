@@ -39,14 +39,14 @@
       <section class="container-form">
         <form>
           <div class="label-float">
-            <span id="spanTarefa"></span>
+            <span id="spanTarefa">0/25</span>
             <input maxlength="25" type="text" id="tarefa" required>
             <label id='labelTarefa' for="tarefa">Tarefa</label>
           </div>
-          <div class="label-float">
-            <span id="spanDescricao"></span>
+          <div class="label-float descricao">
+            <span id="spanDescricao">0/50</span>
             <input maxlength="50" type="text" id="descricao" required>
-            <label id='labelDescricao' for="descricao">descricao</label>
+            <label id='labelDescricao' for="descricao">Descrição</label>
           </div>
         </form>
         <button id="btnInserir">+</button>
@@ -56,8 +56,15 @@
         <ul>
         </ul>
         <section class="container-footer">
-          <div class="card-itens">
-            <p id="itemLista"></p>
+          <div class="container-paginacao">
+            <div class="card-itens">
+              <input type="button" id="retornarTudo" value="«">
+              <input type="button" id="retornar" value="⬅">
+              <span id="paginacao"></span>
+              <input type="button" id="avancar" value="➡">
+              <input type="button" id="avancarTudo" value="»">
+            </div>
+            <span id="itemLista"></span>
           </div>
           <div class="filtro">
             <button id="todos" class="on">Todos</button>
