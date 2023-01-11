@@ -1,7 +1,29 @@
+let btn = document.querySelector(".fa");
+
+btn.addEventListener("click", () => {
+  if (btn.classList.contains("fa-eye")) {
+    btn.classList.remove("fa-eye");
+    btn.classList.add("fa-eye-slash");
+  } else if (btn.classList.contains("fa-eye-slash")) {
+    btn.classList.remove("fa-eye-slash");
+    btn.classList.add("fa-eye");
+  }
+  let inputSenha = document.querySelector("#senha");
+
+  if (inputSenha.getAttribute("type") == "password") {
+    inputSenha.setAttribute("type", "text");
+  } else {
+    inputSenha.setAttribute("type", "password");
+  }
+});
+
+if (localStorage.getItem("token") !== null) {
+  window.location.href = "../Tela-Inicial/tela.html";
+}
+
 function login() {
   let usuario = document.querySelector("#usuario");
   let labelUser = document.querySelector("#labelUser");
-
   let senha = document.querySelector("#senha");
   let labelSenha = document.querySelector("#labelSenha");
 
@@ -28,7 +50,7 @@ function login() {
     }
   });
   if (usuario.value == userValido.usuario && senha.value == userValido.senha) {
-    window.location.href = "./Tela-Inicial/tela.html";
+    window.location.href = "../Tela-Inicial/tela.html";
     let token =
       Math.random().toString(16).substring(2) +
       Math.random().toString(16).substring(2);

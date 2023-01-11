@@ -1,16 +1,16 @@
 p {
-  color: #482b82;
+  color: var(--border-color);
   font-weight: 800;
   font-size: 0.8rem;
 }
 p a {
-  color: #120457;
+  color: var(--color);
   font-weight: bold;
   transition: all 0.3s ease-out;
 }
 
 p a:hover {
-  color: #482b82;
+  color: var(--border-color);
 }
 
 @media (max-width: 700px) {

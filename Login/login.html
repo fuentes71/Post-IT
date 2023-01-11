@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./login.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Post It | Login</title>
+</head>
+
+<body class="body">
+
+  <main class="main">
+    <nav>
+      <button id="darkMode"><img id="img" style="max-width:20px" src="../Assets/svg/moon.svg" alt=""></button>
+    </nav>
+    <section class="container-form">
+      <h1>Post-IT</h1>
+      <span id="error"></span>
+      <form action="">
+        <div class="label-float">
+          <input type="text" id="usuario" required>
+          <label id='labelUser' for="usuario">usuario</label>
+        </div>
+        <div class="label-float">
+          <input type="password" id="senha" required>
+          <label id='labelSenha' for="senha">Senha</label>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </div>
+      </form>
+      <button onclick="login()">Entrar</button>
+
+      <hr>
+      <span>
+        <p>Ainda não se cadastrou? <a href="../Cadastro/cadastro.html"> Cadastre-se</a></p>
+      </span>
+    </section>
+  </main>
+  <script src="./login.js"></script>
+  <script src="../javascript/light/dark-mode.js"></script>
+
+</body>
+
+</html>

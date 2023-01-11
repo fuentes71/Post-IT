@@ -48,10 +48,14 @@ tarefa.addEventListener("keydown", (e) => {
   }
 });
 btnInserir.onclick = () => {
-  if (descricao.value !== "" && tarefa.value !== "") {
+  if (descricao.value == "" && tarefa.value == "") {
+  } else {
     inputTarefa();
+    // textoLenght(e, spanTarefa, 0, 25);
+    // textoLenght(e, spanDescricao, 0, 50);
   }
 };
+
 btnDeleteAll.onclick = () => {
   let user = userLogado.post;
   if (user.length != 0) {
@@ -145,7 +149,6 @@ function updateDB() {
 function loadItens() {
   verificarPaginacao();
   loadpag();
-
   ul.innerHTML = "";
   listaUser.forEach((user) => {
     if (user.usuario == userLogado.usuario) {
@@ -248,7 +251,6 @@ avancarTudo.onclick = () => {
 };
 
 function loadpag() {
-  console.log(userLogado.paginate);
   if (userLogado.paginate > 1) {
     if (paginate === 1) {
       retornar.setAttribute("style", "display:none");
@@ -273,7 +275,6 @@ function loadpag() {
 }
 function insertItemTela(tarefa, descricao, status, i) {
   const li = document.createElement("li");
-
   li.innerHTML = `<div id='div-${i}' class="divLi">
             <div class="divCheck">
              <input type="checkbox"  class="_checkbox" id="${i}" ${status} data-i=${i} onchange="done(this, ${i});"  />
@@ -286,7 +287,7 @@ function insertItemTela(tarefa, descricao, status, i) {
               <p>${descricao}</p>
             </span>
       <div class="divButton">
-        <button onclick="editar(${i})" data-i=${i}><i class="fa fa-pencil"></i></i></button> |
+        <button onclick="editar(${i})" data-i=${i}><i class="fa fa-pencil"></i></i></button> <span style="color:">|</span>
         <button onclick="removeItem(${i})" data-i=${i}><i class="fa fa-trash"></i></i></button>
       </div>
     </div>`;
@@ -312,24 +313,33 @@ function editar(i) {
   btnInserir.setAttribute("style", "display:none");
   btnSalvarEditado.setAttribute("style", "display:block");
   tarefa.value = userLogado.post[i].tarefa;
-
   descricao.value = userLogado.post[i].descricao;
   tarefa.focus();
   index = i;
 }
-btnSalvarEditado.addEventListener("click", (e) => {
+
+btnSalvarEditado.addEventListener("click", () => {
   userLogado.post[index] = {
     tarefa: tarefa.value,
     descricao: descricao.value,
     status: "",
   };
   updateDB();
+  editarbackground();
   tarefa.value = "";
   descricao.value = "";
   btnInserir.setAttribute("style", "display:block");
   btnSalvarEditado.setAttribute("style", "display:none");
 });
-
+function editarbackground() {
+  let div = document.getElementById(`div-${index}`);
+  div.animate();
+  div.classList.add("active");
+  setTimeout(() => {
+    div.classList.remove("active");
+  }, 200);
+  console.log(div);
+}
 function removeItem(i) {
   let confirmacao = window.confirm(
     "Tem certeza que deseja excluir está tarefa?"
