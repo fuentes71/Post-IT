@@ -1,31 +1,30 @@
 let divConfirm = document.getElementById("divConfirm");
 let tituloAlert = document.getElementById("tituloAlert");
 let textoAlert = document.getElementById("textoAlert");
-let confirmar = document.getElementById("confirmar");
-let cancelar = document.getElementById("cancelar");
-let userLogado = JSON.parse(localStorage.getItem("userLogado"));
-let listaUser = JSON.parse(localStorage.getItem("listaUser"));
-let logado = document.querySelector("#logado");
-let tarefa = document.querySelector("#tarefa");
-let descricao = document.querySelector("#descricao");
-let btnInserir = document.querySelector("#btnInserir");
-let btnEdit = document.querySelector("#btnEdit");
-let btnDeleteAll = document.querySelector("#btnDeleteAll");
-let janelaEdicao = document.querySelector("#janelaEdicao");
-let carregando = document.querySelector("#carregando");
-let carregado = document.querySelector("#carregado");
-let ul = document.querySelector("ul");
-let spanTarefa = document.querySelector("#spanTarefa");
-let spanDescricao = document.querySelector("#spanDescricao");
-let todos = document.querySelector("#todos");
-let ativos = document.querySelector("#ativos");
-let completos = document.querySelector("#completos");
-let divLi = document.querySelector(".divLi");
-let itemLista = document.querySelector("#itemLista");
-let retornar = document.querySelector("#retornar");
-let retornarTudo = document.querySelector("#retornarTudo");
-let avancar = document.querySelector("#avancar");
-let user = userLogado.post;
+const confirmar = document.getElementById("confirmar");
+const cancelar = document.getElementById("cancelar");
+const userLogado = JSON.parse(localStorage.getItem("userLogado"));
+const listaUser = JSON.parse(localStorage.getItem("listaUser"));
+const logado = document.querySelector("#logado");
+const tarefa = document.querySelector("#tarefa");
+const descricao = document.querySelector("#descricao");
+const btnInserir = document.querySelector("#btnInserir");
+const btnEdit = document.querySelector("#btnEdit");
+const btnDeleteAll = document.querySelector("#btnDeleteAll");
+const janelaEdicao = document.querySelector("#janelaEdicao");
+const carregando = document.querySelector("#carregando");
+const carregado = document.querySelector("#carregado");
+const ul = document.querySelector("ul");
+const spanTarefa = document.querySelector("#spanTarefa");
+const spanDescricao = document.querySelector("#spanDescricao");
+const todos = document.querySelector("#todos");
+const ativos = document.querySelector("#ativos");
+const completos = document.querySelector("#completos");
+const divLi = document.querySelector(".divLi");
+const itemLista = document.querySelector("#itemLista");
+const retornar = document.querySelector("#retornar");
+const retornarTudo = document.querySelector("#retornarTudo");
+const avancar = document.querySelector("#avancar");
 let paginate = 1;
 let filtro;
 if (localStorage.getItem("token") == null) {
@@ -70,16 +69,14 @@ function inserir() {
     );
   }
 }
-
 btnDeleteAll.onclick = () => {
-  let user = userLogado.post;
-  if (user.length != 0) {
+  if (userLogado.post.length != 0) {
     alerta("EXCLUIR", "Deseja excluir todas as tarefas?");
     divConfirm.addEventListener("click", (e) => {
       if (e.target.id == "confirmar") {
-        user.forEach((item) => {
-          for (let i = 0; user.length > 0; i++) {
-            user.shift(item);
+        userLogado.post.forEach((item) => {
+          for (let i = 0; userLogado.post.length > 0; i++) {
+            userLogado.post.shift(item);
           }
         });
       }
@@ -89,14 +86,6 @@ btnDeleteAll.onclick = () => {
     alerta("#ERROR", "Não há nenhum item na lista!!", "none");
   }
 };
-
-// const validar = () => {
-//   if (descricao.value == "" && tarefa.value == "") {
-//     btnInserir.setAttribute("disabled", "disabled");
-//   } else {
-//     btnInserir.setAttribute("disabled", "false");
-//   }
-// };
 function itensLista() {
   paginacao.innerHTML = paginate;
   itemLista.innerHTML = `${userLogado.post.length}/30 Tarefas`;
@@ -114,7 +103,6 @@ function inputTarefa() {
   tarefa.value = "";
   tarefa.focus();
 }
-
 function setItensDB() {
   if (userLogado.post.length >= 30) {
     alerta("LIMITE ATINGIDO!", "Limite maximo de 30 tarefas!", "none");
@@ -242,7 +230,6 @@ function loadItens() {
           return;
         }
         break;
-
       default:
         break;
     }
@@ -258,7 +245,6 @@ retornarTudo.onclick = () => {
   loadpag();
   loadItens();
 };
-
 avancar.onclick = () => {
   paginate += 1;
   loadpag();
@@ -269,7 +255,6 @@ avancarTudo.onclick = () => {
   loadpag();
   loadItens();
 };
-
 function loadpag() {
   if (userLogado.paginate > 1) {
     if (paginate === 1) {
@@ -295,7 +280,6 @@ function loadpag() {
 }
 function insertItemTela(tarefa, descricao, status, i) {
   const li = document.createElement("li");
-
   li.innerHTML = `<div id='div-${i}' class="divLi ">
             <div class="divCheck">
              <input type="checkbox"  class="_checkbox" id="${i}" ${status} data-i=${i} onchange="done(this, ${i});"  />
@@ -320,7 +304,6 @@ function insertItemTela(tarefa, descricao, status, i) {
   }
   tarefa.value = "";
 }
-
 function done(chk, i) {
   if (chk.checked) {
     userLogado.post[i].status = "checked";
@@ -329,7 +312,6 @@ function done(chk, i) {
   }
   updateDB();
 }
-
 function editar(i) {
   btnInserir.setAttribute("class", "btnSalvarEditado");
   btnInserir.innerHTML = "Salvar";
@@ -340,7 +322,6 @@ function editar(i) {
   spanDescricao.innerHTML = `${userLogado["post"][i].descricao.length}/50`;
   tarefa.focus();
 }
-
 function salvarEdicao(i) {
   if (tarefa.value !== "" && descricao.value != "") {
     userLogado.post[i] = {
@@ -396,7 +377,6 @@ function loading() {
   carregando.setAttribute("style", "display:none");
   carregado.setAttribute("style", "display:block");
 }
-
 function alerta(titulo, texto, display) {
   divConfirm.setAttribute("style", "display: flex");
   let div = document.createElement("div");
@@ -419,7 +399,6 @@ function alerta(titulo, texto, display) {
     }
   });
 }
-
 setTimeout(() => {
   loadItens();
 });
