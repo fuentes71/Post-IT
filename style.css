@@ -30,7 +30,11 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
-
+nav {
+  position: absolute;
+  top: 30px;
+  right: 20vw;
+}
 main {
   display: flex;
   flex-direction: row;
@@ -47,7 +51,6 @@ main {
   background-color: var(--bg-color);
   padding: 60px;
   gap: 40px;
-
   border-radius: 5%;
   justify-content: center;
   align-items: center;

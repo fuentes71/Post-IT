@@ -19,12 +19,12 @@ function setDarkmode() {
   if (mode == "true") {
     html.classList.add("dark-mode");
     img.setAttribute("src", "../Assets/svg/sun.svg");
-    img.setAttribute("alt", "Lua");
+    img.setAttribute("alt", "Sol");
   }
   if (mode == "false") {
     html.classList.remove("dark-mode");
     img.setAttribute("src", "../Assets/svg/moon.svg");
-    img.setAttribute("alt", "Sol");
+    img.setAttribute("alt", "Lua");
   }
 }
 function getMode() {

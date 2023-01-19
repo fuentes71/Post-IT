@@ -22,18 +22,15 @@
   <div id="carregado">
     <header>
       <nav>
-        <h1 id="logado"></h1>
         <button onclick="sair()">Sair</button>
         <button id="darkMode"><img id="img" style="max-width:20px" src="../Assets/svg/moon.svg" alt=""></button>
       </nav>
-      <div style="color: blueviolet;">arrumar o editar // arrumar o span.length</div>
+
     </header>
     <main class="main">
-
       <section class="container-text">
         <div>
           <h2>Post-IT</h2>
-
         </div>
         <div>
         </div>
@@ -51,8 +48,7 @@
             <label id='labelDescricao' for="descricao">Descrição</label>
           </div>
         </form>
-        <button id="btnInserir" class="btnInserir">+</button>
-        <button id="btnSalvarEditado">Salvar</button>
+        <button id="btnInserir" onclick="inserir()">+</button>
       </section>
       <section id="container-list">
         <ul>
@@ -81,9 +77,11 @@
       </section>
     </main>
   </div>
+  <div id="divConfirm"></div>
 
   <script src="./tela.js"></script>
   <script src="../javascript/light/dark-mode.js"></script>
+  <script src="../javascript/alerta/alerta.js"></script>
 </body>
 
 </html>

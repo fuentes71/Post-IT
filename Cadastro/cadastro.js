@@ -15,62 +15,84 @@ let voltar = document.querySelector("#voltar");
 voltar.onclick = () => (window.location.href = "../");
 
 let valid = {
-  nome: { validNome: false },
+  nome: {
+    regex:
+      "^(?:[p{Lu}&&[p{IsLatin}]])(?:(?:')?(?:[p{Ll}&&[p{IsLatin}]]))+(?:-(?:[p{Lu}&&[p{IsLatin}]])(?:(?:')?(?:[p{Ll}&&[p{IsLatin}]]))+)*(?: (?:(?:e|y|de(?:(?: la| las| lo| los))?|do|dos|da|das|del|van|von|bin|le) )?(?:(?:(?:d'|D'|O'|Mc|Mac|al-))?(?:[p{Lu}&&[p{IsLatin}]])(?:(?:')?(?:[p{Ll}&&[p{IsLatin}]]))+|(?:[p{Lu}&&[p{IsLatin}]])(?:(?:')?(?:[p{Ll}&&[p{IsLatin}]]))+(?:-(?:[p{Lu}&&[p{IsLatin}]])(?:(?:')?(?:[p{Ll}&&[p{IsLatin}]]))+)*))+(?: (?:Jr.|II|III|IV))?$",
+    validNome: false,
+  },
   senha: { validSenha: false },
   confirmarSenha: { validConfirmarSenha: false },
   usuario: { validUsuario: false },
 };
+
 nome.addEventListener("keyup", () => {
   if (nome.value.length <= 2) {
-    labelNome.setAttribute("style", "color: red");
-    labelNome.innerHTML = "Nome *Insira no minimo 3 caracteres";
-    nome.setAttribute("style", "border-color: red");
-    valid.nome.validNome = false;
+    valid.nome.validNome = verificacao(
+      nome,
+      labelNome,
+      "Nome *Insira no minimo 3 caracteres",
+      "red",
+      false
+    );
   } else {
-    labelNome.setAttribute("style", "color: green");
-    nome.setAttribute("style", "border-color: green");
-    labelNome.innerHTML = "Nome";
-    valid.nome.validNome = true;
+    valid.nome.validNome = verificacao(nome, labelNome, "Nome", "green", true);
   }
 });
 usuario.addEventListener("keyup", () => {
   if (usuario.value.length <= 4) {
-    labelUsuario.setAttribute("style", "color: red");
-    labelUsuario.innerHTML = "Usuario *Insira no minimo 5 caracteres";
-    usuario.setAttribute("style", "border-color: red");
-    valid.usuario.validUsuario = false;
+    valid.usuario.validUsuario = verificacao(
+      usuario,
+      labelUsuario,
+      "Usuário *Insira no minimo 5 caracteres",
+      "red",
+      false
+    );
   } else {
-    labelUsuario.setAttribute("style", "color: green");
-    usuario.setAttribute("style", "border-color: green");
-    labelUsuario.innerHTML = "Usuario";
-    valid.usuario.validUsuario = true;
+    valid.usuario.validUsuario = verificacao(
+      usuario,
+      labelUsuario,
+      "Usuário",
+      "green",
+      true
+    );
   }
 });
 senha.addEventListener("keyup", () => {
   if (senha.value.length <= 5) {
-    labelSenha.setAttribute("style", "color: red");
-    labelSenha.innerHTML = "Senha *Insira no minimo 6 caracteres";
-    senha.setAttribute("style", "border-color: red");
-    valid.senha.validSenha = true;
+    valid.senha.validSenha = verificacao(
+      senha,
+      labelSenha,
+      "Senha *Insira no minimo 6 caracteres",
+      "red",
+      false
+    );
   } else {
-    labelSenha.setAttribute("style", "color: green");
-    senha.setAttribute("style", "border-color: green");
-    labelSenha.innerHTML = "Senha";
-    valid.senha.validSenha = true;
+    valid.senha.validSenha = verificacao(
+      senha,
+      labelSenha,
+      "Senha",
+      "green",
+      true
+    );
   }
 });
 confirmarSenha.addEventListener("keyup", () => {
   if (senha.value !== confirmarSenha.value) {
-    labelConfirmarSenha.setAttribute("style", "color: red");
-    labelConfirmarSenha.innerHTML = "Confirmar Senha *As senhas não conferem";
-    confirmarSenha.setAttribute("style", "border-color: red");
-    valid.confirmarSenha.validConfirmarSenha = false;
-    console.log(valid.confirmarSenha.validConfirmarSenha);
+    valid.confirmarSenha.validConfirmarSenha = verificacao(
+      confirmarSenha,
+      labelConfirmarSenha,
+      "Confirmar Senha *Senhas diferentes!",
+      "red",
+      false
+    );
   } else {
-    labelConfirmarSenha.setAttribute("style", "color: green");
-    confirmarSenha.setAttribute("style", "border-color: green");
-    labelConfirmarSenha.innerHTML = "Confirmar Senha";
-    valid.confirmarSenha.validConfirmarSenha = true;
+    valid.confirmarSenha.validConfirmarSenha = verificacao(
+      confirmarSenha,
+      labelConfirmarSenha,
+      "Confirmar Senha",
+      "green",
+      true
+    );
   }
 });
 
@@ -106,6 +128,12 @@ btnConfirmarSenha.addEventListener("click", () => {
     inputSenha.setAttribute("type", "password");
   }
 });
+function verificacao(value, label, html, color, boolean) {
+  label.setAttribute("style", "color: " + color);
+  label.innerHTML = html;
+  value.setAttribute("style", "border-color: " + color);
+  return boolean;
+}
 
 function cadastrar() {
   if (

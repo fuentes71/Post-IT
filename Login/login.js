@@ -1,4 +1,10 @@
+let usuario = document.querySelector("#usuario");
+let labelUser = document.querySelector("#labelUser");
+let senha = document.querySelector("#senha");
+let labelSenha = document.querySelector("#labelSenha");
+let error = document.querySelector("#error");
 let btn = document.querySelector(".fa");
+let inputSenha = document.querySelector("#senha");
 
 btn.addEventListener("click", () => {
   if (btn.classList.contains("fa-eye")) {
@@ -8,7 +14,6 @@ btn.addEventListener("click", () => {
     btn.classList.remove("fa-eye-slash");
     btn.classList.add("fa-eye");
   }
-  let inputSenha = document.querySelector("#senha");
 
   if (inputSenha.getAttribute("type") == "password") {
     inputSenha.setAttribute("type", "text");
@@ -22,14 +27,7 @@ if (localStorage.getItem("token") !== null) {
 }
 
 function login() {
-  let usuario = document.querySelector("#usuario");
-  let labelUser = document.querySelector("#labelUser");
-  let senha = document.querySelector("#senha");
-  let labelSenha = document.querySelector("#labelSenha");
-
-  let error = document.querySelector("#error");
   let listaUser = [];
-
   let userValido = {
     nome: "",
     usuario: "",
@@ -38,6 +36,9 @@ function login() {
 
   listaUser = JSON.parse(localStorage.getItem("listaUser"));
 
+  if (!listaUser) {
+    return errorStyle();
+  }
   listaUser.forEach((item) => {
     if (usuario.value == item.usuario && senha.value == item.senha) {
       userValido = {
@@ -57,13 +58,31 @@ function login() {
     localStorage.setItem("token", token);
     localStorage.setItem("userLogado", JSON.stringify(userValido));
   } else {
-    labelUser.setAttribute("style", "color:red");
-    labelSenha.setAttribute("style", "color:red");
-    usuario.setAttribute("style", "border-color: red");
-    senha.setAttribute("style", "border-color: red");
-    error.setAttribute("style", "display:block");
+    errorStyle();
+    return;
+  }
+}
+
+const errorStyle = () => {
+  labelUser.setAttribute("style", "color:red");
+  labelSenha.setAttribute("style", "color:red");
+  usuario.setAttribute("style", "border-color: red");
+  senha.setAttribute("style", "border-color: red");
+  error.setAttribute("style", "display:block");
+  if (!usuario.value || !senha.value) {
+    usuario.focus();
+    error.innerHTML = "Preencha os campos";
+  } else {
     error.innerHTML = "Usuario ou senha incorretos";
     usuario.focus();
   }
-  console.log(userValido);
-}
+  setTimeout(() => {
+    error.innerHTML = "";
+    labelUser.removeAttribute("style", "color:red");
+    labelSenha.removeAttribute("style", "color:red");
+    usuario.removeAttribute("style", "border-color: red");
+    senha.removeAttribute("style", "border-color: red");
+    error.removeAttribute("style", "display:block");
+    error.removeAttribute("style", "display:none");
+  }, 1500);
+};

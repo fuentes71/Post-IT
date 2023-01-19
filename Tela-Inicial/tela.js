@@ -1,3 +1,8 @@
+let divConfirm = document.getElementById("divConfirm");
+let tituloAlert = document.getElementById("tituloAlert");
+let textoAlert = document.getElementById("textoAlert");
+let confirmar = document.getElementById("confirmar");
+let cancelar = document.getElementById("cancelar");
 let userLogado = JSON.parse(localStorage.getItem("userLogado"));
 let listaUser = JSON.parse(localStorage.getItem("listaUser"));
 let logado = document.querySelector("#logado");
@@ -12,7 +17,6 @@ let carregado = document.querySelector("#carregado");
 let ul = document.querySelector("ul");
 let spanTarefa = document.querySelector("#spanTarefa");
 let spanDescricao = document.querySelector("#spanDescricao");
-let containerList = document.querySelector("#container-list");
 let todos = document.querySelector("#todos");
 let ativos = document.querySelector("#ativos");
 let completos = document.querySelector("#completos");
@@ -23,58 +27,79 @@ let retornarTudo = document.querySelector("#retornarTudo");
 let avancar = document.querySelector("#avancar");
 let user = userLogado.post;
 let paginate = 1;
-let index;
 let filtro;
-logado.innerHTML = `Bem-vindo ${userLogado.nome}`;
 if (localStorage.getItem("token") == null) {
   alert("Voce precisa estar logado para acessar está pagina!");
   window.location.href = "../";
 }
 
 function sair() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("userLogado");
-  window.location.href = "../";
+  alerta("Desconectar", "Voce tem certeza que deseja desconectar da pagina?");
+  divConfirm.addEventListener("click", (e) => {
+    if (e.target.id == "confirmar") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userLogado")((window.location.href = "../"));
+    }
+  });
 }
 descricao.addEventListener("keydown", (e) => {
-  if (descricao.value.length < 50) {
-    textoLenght(e, spanDescricao, descricao.value.length, 50);
+  console.log(e.key);
+  if (e.key != "tab" || e.key != "enter") {
+    if (descricao.value.length < 50) {
+      textoLenght(e, spanDescricao, descricao.value.length, 50);
+    }
   }
 });
 
 tarefa.addEventListener("keydown", (e) => {
   if (tarefa.value.length < 25) {
     textoLenght(e, spanTarefa, tarefa.value.length, 25);
+    // validar();
   }
 });
-btnInserir.onclick = () => {
-  if (descricao.value == "" && tarefa.value == "") {
-  } else {
+function inserir() {
+  if (descricao.value !== "" && tarefa.value !== "") {
     inputTarefa();
-    // textoLenght(e, spanTarefa, 0, 25);
-    // textoLenght(e, spanDescricao, 0, 50);
+    spanTarefa.innerHTML = "0/25";
+    spanDescricao.innerHTML = "0/50";
+  } else {
+    alerta(
+      "CAMPOS EM BRANCO!",
+      "Necessario preenchimento de todos os Campos!!",
+      "none"
+    );
   }
-};
+}
 
 btnDeleteAll.onclick = () => {
   let user = userLogado.post;
   if (user.length != 0) {
-    let confirmacao = window.confirm("Deseja excluir todas as tarefas?");
-    if (confirmacao) {
-      user.forEach((item) => {
-        for (let i = 0; user.length > 0; i++) {
-          user.shift(item);
-        }
-      });
-    }
+    alerta("EXCLUIR", "Deseja excluir todas as tarefas?");
+    divConfirm.addEventListener("click", (e) => {
+      if (e.target.id == "confirmar") {
+        user.forEach((item) => {
+          for (let i = 0; user.length > 0; i++) {
+            user.shift(item);
+          }
+        });
+      }
+      updateDB();
+    });
+  } else {
+    alerta("#ERROR", "Não há nenhum item na lista!!", "none");
   }
-
-  updateDB();
 };
 
+// const validar = () => {
+//   if (descricao.value == "" && tarefa.value == "") {
+//     btnInserir.setAttribute("disabled", "disabled");
+//   } else {
+//     btnInserir.setAttribute("disabled", "false");
+//   }
+// };
 function itensLista() {
   paginacao.innerHTML = paginate;
-  itemLista.innerHTML = `${userLogado.post.length}/30 Itens`;
+  itemLista.innerHTML = `${userLogado.post.length}/30 Tarefas`;
 }
 function textoLenght(e, span, length, number) {
   if (e.code !== "Backspace") {
@@ -89,14 +114,10 @@ function inputTarefa() {
   tarefa.value = "";
   tarefa.focus();
 }
-function display() {
-  if (userLogado.post.length > 0)
-    containerList.setAttribute("style", "display:grid");
-  else containerList.setAttribute("style", "display:none");
-}
+
 function setItensDB() {
   if (userLogado.post.length >= 30) {
-    alert("Limite máximo de 10 itens atingido!");
+    alerta("LIMITE ATINGIDO!", "Limite maximo de 30 tarefas!", "none");
     return;
   }
   userLogado.post.push({
@@ -154,7 +175,6 @@ function loadItens() {
     if (user.usuario == userLogado.usuario) {
       userLogado.post = user.post;
     }
-    display();
     itensLista();
   });
   userLogado.post.forEach((item, i) => {
@@ -275,7 +295,8 @@ function loadpag() {
 }
 function insertItemTela(tarefa, descricao, status, i) {
   const li = document.createElement("li");
-  li.innerHTML = `<div id='div-${i}' class="divLi">
+
+  li.innerHTML = `<div id='div-${i}' class="divLi ">
             <div class="divCheck">
              <input type="checkbox"  class="_checkbox" id="${i}" ${status} data-i=${i} onchange="done(this, ${i});"  />
               <label for="${i}">
@@ -283,7 +304,7 @@ function insertItemTela(tarefa, descricao, status, i) {
               </label>
             </div>
             <span data-si=${i}> 
-              <h2>${tarefa}</h2>
+              <h2>${tarefa}</h2> <span id="span-${i}"></span>
               <p>${descricao}</p>
             </span>
       <div class="divButton">
@@ -310,42 +331,58 @@ function done(chk, i) {
 }
 
 function editar(i) {
-  btnInserir.setAttribute("style", "display:none");
-  btnSalvarEditado.setAttribute("style", "display:block");
+  btnInserir.setAttribute("class", "btnSalvarEditado");
+  btnInserir.innerHTML = "Salvar";
+  btnInserir.setAttribute("onclick", `salvarEdicao(${i})`);
   tarefa.value = userLogado.post[i].tarefa;
   descricao.value = userLogado.post[i].descricao;
+  spanTarefa.innerHTML = `${userLogado["post"][i].tarefa.length}/25`;
+  spanDescricao.innerHTML = `${userLogado["post"][i].descricao.length}/50`;
   tarefa.focus();
-  index = i;
 }
 
-btnSalvarEditado.addEventListener("click", () => {
-  userLogado.post[index] = {
-    tarefa: tarefa.value,
-    descricao: descricao.value,
-    status: "",
-  };
-  updateDB();
-  editarbackground();
-  tarefa.value = "";
-  descricao.value = "";
-  btnInserir.setAttribute("style", "display:block");
-  btnSalvarEditado.setAttribute("style", "display:none");
-});
-function editarbackground() {
-  let div = document.getElementById(`div-${index}`);
-  div.animate();
+function salvarEdicao(i) {
+  if (tarefa.value !== "" && descricao.value != "") {
+    userLogado.post[i] = {
+      tarefa: tarefa.value,
+      descricao: descricao.value,
+      status: "",
+    };
+    updateDB();
+    editarbackground(i);
+    tarefa.value = "";
+    spanTarefa.innerHTML = "0/25";
+    descricao.value = "";
+    spanDescricao.innerHTML = "0/50";
+    btnInserir.removeAttribute("class", "btnSalvarEditado");
+    btnInserir.innerHTML = "+";
+    btnInserir.setAttribute("onclick", `inserir()`);
+  } else {
+    alerta(
+      "Preencha todos os campos!",
+      "Necessario preenchimento de todos os campos para Salvar a alteração!!",
+      "none"
+    );
+  }
+}
+function editarbackground(i) {
+  let div = document.getElementById(`div-${i}`);
   div.classList.add("active");
   setTimeout(() => {
     div.classList.remove("active");
-  }, 200);
+  }, 100);
   console.log(div);
 }
 function removeItem(i) {
-  let confirmacao = window.confirm(
-    "Tem certeza que deseja excluir está tarefa?"
-  );
-  if (confirmacao) userLogado.post.splice(i, 1);
-  updateDB();
+  alerta("EXCLUIR TAREFA!", "Tem certeza que deseja excluir está tarefa?");
+  let index = i;
+  divConfirm.addEventListener("click", (e) => {
+    console.log(index);
+    if (e.target.id == "confirmar") {
+      userLogado.post.splice(index, 1);
+      updateDB();
+    }
+  });
 }
 function atualizaUsuario() {
   listaUser.forEach((user) => {
@@ -359,6 +396,30 @@ function loading() {
   carregando.setAttribute("style", "display:none");
   carregado.setAttribute("style", "display:block");
 }
+
+function alerta(titulo, texto, display) {
+  divConfirm.setAttribute("style", "display: flex");
+  let div = document.createElement("div");
+  div.innerHTML = `
+          <h2 id="tituloAlert">${titulo}</h2>
+          <span id="textoAlert">${texto}</span>
+          <input type="button" id='confirmar' value="Confirmar" >
+          <input type="button" style="display:${display}" id='cancelar' value="Cancelar" >
+  `;
+  div.setAttribute("class", "content-box");
+  divConfirm.appendChild(div);
+  divConfirm.addEventListener("click", (e) => {
+    if (
+      e.target.id == "divConfirm" ||
+      e.target.id == "cancelar" ||
+      e.target.id == "confirmar"
+    ) {
+      divConfirm.innerHTML = "";
+      divConfirm.removeAttribute("style", "display: flex");
+    }
+  });
+}
+
 setTimeout(() => {
   loadItens();
 });

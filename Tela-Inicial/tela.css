@@ -141,7 +141,12 @@ hr {
   top: 16px;
   right: 40px;
 }
-
+.container-form button:disabled {
+  border: 1px solid #999999;
+  color: #666666;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .label-float span {
   display: block;
   position: absolute;
@@ -154,7 +159,7 @@ hr {
   width: 20%;
 }
 #container-list {
-  display: block;
+  display: grid;
   position: absolute;
   top: calc(40vh);
   width: 55%;
@@ -227,12 +232,12 @@ ul {
 .fa-pencil {
   color: #00bb00;
 }
-#btnSalvarEditado {
+.btnSalvarEditado {
   display: none;
   padding: 5px 8px;
   margin-left: 0;
 }
-#btnSalvarEditado:hover {
+.btnSalvarEditado:hover {
   background-color: #00bb0075;
 }
 
@@ -416,3 +421,90 @@ ul {
 #avancarTudo {
   margin-left: 60px;
 }
+
+#divConfirm {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#divConfirm .content-box {
+  display: block;
+  /* top: calc(50% - 40px);
+  left: calc(50% - 260px); */
+  position: absolute;
+  background-color: whitesmoke;
+  opacity: 1;
+  border-radius: 5px;
+  padding: 80px 160px;
+  box-shadow: #00000060 7px 7px 1px 0px;
+}
+
+#divConfirm div h2 {
+  position: absolute;
+  color: #f72414;
+  top: 10px;
+  left: 10px;
+  font-size: 2rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-style: italic;
+}
+#divConfirm #confirmar,
+#divConfirm #cancelar {
+  display: block;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: #00000060 2px 2px 1px 0px;
+}
+#divConfirm #confirmar {
+  right: 90px;
+  color: #a1f73e;
+  background-color: #07d410;
+  transition: all 0.2s;
+}
+#divConfirm #confirmar:hover {
+  background-color: #04820a;
+  color: #07d410;
+}
+#divConfirm #cancelar {
+  color: #ff9d96;
+  background-color: #f72414;
+  transition: all 0.2s;
+}
+#divConfirm #cancelar:hover {
+  background-color: #a6170d;
+  color: #cc7e78;
+}
+
+/* #divTarefa {
+  position: absolute;
+  right: -0px;
+  background-color: #fff;
+  padding: 20px 60px;
+  border-radius: 20px;
+  animation: adicionandoAnimacao alternate 2s;
+}
+
+@keyframes adicionandoAnimacao {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+} */
