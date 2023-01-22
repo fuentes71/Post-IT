@@ -1,17 +1,10 @@
 let divConfirm = document.getElementById("divConfirm");
-let tituloAlert = document.getElementById("tituloAlert");
-let textoAlert = document.getElementById("textoAlert");
-const confirmar = document.getElementById("confirmar");
-const cancelar = document.getElementById("cancelar");
 const userLogado = JSON.parse(localStorage.getItem("userLogado"));
 const listaUser = JSON.parse(localStorage.getItem("listaUser"));
-const logado = document.querySelector("#logado");
 const tarefa = document.querySelector("#tarefa");
 const descricao = document.querySelector("#descricao");
 const btnInserir = document.querySelector("#btnInserir");
-const btnEdit = document.querySelector("#btnEdit");
 const btnDeleteAll = document.querySelector("#btnDeleteAll");
-const janelaEdicao = document.querySelector("#janelaEdicao");
 const carregando = document.querySelector("#carregando");
 const carregado = document.querySelector("#carregado");
 const ul = document.querySelector("ul");
@@ -20,7 +13,6 @@ const spanDescricao = document.querySelector("#spanDescricao");
 const todos = document.querySelector("#todos");
 const ativos = document.querySelector("#ativos");
 const completos = document.querySelector("#completos");
-const divLi = document.querySelector(".divLi");
 const itemLista = document.querySelector("#itemLista");
 const retornar = document.querySelector("#retornar");
 const retornarTudo = document.querySelector("#retornarTudo");
@@ -49,17 +41,14 @@ function sair() {
 }
 descricao.addEventListener("keydown", (e) => {
   console.log(e.key);
-  if (e.key != "tab" || e.key != "enter") {
-    if (descricao.value.length < 50) {
-      textoLenght(e, spanDescricao, descricao.value.length, 50);
-    }
+  if (descricao.value.length < 50) {
+    textoLenght(e, spanDescricao, descricao.value.length, 50);
   }
 });
 
 tarefa.addEventListener("keydown", (e) => {
   if (tarefa.value.length < 25) {
     textoLenght(e, spanTarefa, tarefa.value.length, 25);
-    // validar();
   }
 });
 function inserir() {
@@ -280,6 +269,8 @@ function loadpag() {
       avancar.setAttribute("style", "display:none");
       avancarTudo.setAttribute("style", "display:none");
     } else {
+      retornar.setAttribute("style", "display:block");
+      retornarTudo.setAttribute("style", "display:block");
       avancar.setAttribute("style", "display:block");
       avancarTudo.setAttribute("style", "display:block");
     }
@@ -375,16 +366,13 @@ function removeItem(i) {
   );
   divConfirm.onclick = (e) => {
     if (e.target.value == "Excluir") {
-      userLogado.post.forEach((recado, index) => {
-        if (recado.tarefa === userLogado.post[i].tarefa) {
-          // console.log(userLogado.post[i]);
-          console.log(index);
-          userLogado.post.splice(recado, 1);
-        }
-      });
-      updateDB();
+      remove(i);
     }
   };
+}
+function remove(i) {
+  userLogado.post.splice(i, 1);
+  updateDB();
 }
 function atualizaUsuario() {
   listaUser.forEach((user) => {

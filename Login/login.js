@@ -1,10 +1,10 @@
-let usuario = document.querySelector("#usuario");
-let labelUser = document.querySelector("#labelUser");
-let senha = document.querySelector("#senha");
-let labelSenha = document.querySelector("#labelSenha");
-let error = document.querySelector("#error");
-let btn = document.querySelector(".fa");
-let inputSenha = document.querySelector("#senha");
+const usuario = document.querySelector("#usuario");
+const labelUser = document.querySelector("#labelUser");
+const senha = document.querySelector("#senha");
+const labelSenha = document.querySelector("#labelSenha");
+const error = document.querySelector("#error");
+const btn = document.querySelector(".fa");
+const inputSenha = document.querySelector("#senha");
 
 btn.addEventListener("click", () => {
   if (btn.classList.contains("fa-eye")) {
@@ -27,6 +27,9 @@ if (localStorage.getItem("token") !== null) {
 }
 
 function login() {
+  if (!usuario.value || !senha.value) {
+    return errorStyle();
+  }
   let listaUser = [];
   let userValido = {
     nome: "",

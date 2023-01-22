@@ -1,5 +1,6 @@
 main {
   width: 100%;
+  height: 100%;
 }
 #carregando {
   display: block;
@@ -120,8 +121,9 @@ hr {
   height: calc(100% - 30vh);
 }
 .container-form {
-  width: 50%;
-  position: absolute;
+  display: inline-block;
+  width: 50vw;
+  position: relative;
   top: calc(30vh);
   padding: 30px 40px;
   border-radius: 20px;
@@ -130,15 +132,16 @@ hr {
 .container-form form {
   display: flex;
   flex-direction: row;
+  align-items: center;
   position: absolute;
+  width: 100%;
   top: 5px;
   left: 40px;
 }
 .container-form button {
-  display: flex;
-  flex-direction: row;
+  display: block;
   position: absolute;
-  top: 16px;
+  top: 15px;
   right: 40px;
 }
 .container-form button:disabled {
@@ -148,21 +151,37 @@ hr {
   pointer-events: none;
 }
 .label-float span {
-  display: block;
   position: absolute;
   right: 0px;
   top: 0;
   color: var(--color-span);
 }
-.label-float input {
-  display: block;
-  width: 20%;
+/* .label-float input {
+  width: 15vw;
+
+  min-width: 180px;
 }
+.label-float #descricao {
+  width: 28vw;
+} */
+/* @media (max-width: 1000px) {
+  .container-form form {
+    left: 0px;
+    flex-direction: column;
+  }
+  .container-form button {
+    display: block;
+    position: relative;
+  }
+} */
 #container-list {
   display: grid;
+  justify-content: center;
+  align-items: center;
   position: absolute;
+  width: 55vw;
+
   top: calc(40vh);
-  width: 55%;
   color: var(--color-span);
   background-color: var(--bg-color);
   border-radius: 20px;
@@ -179,6 +198,7 @@ ul {
   padding: 15px 60px;
   gap: 20px;
   border-bottom: 1px solid var(--color);
+  position: relative;
 }
 .active {
   transition: background 0.2s;
@@ -195,12 +215,25 @@ ul {
 }
 
 .divLi h2 {
+  display: block;
+  position: relative;
+  width: 48vw;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
   font-size: 2rem;
   color: var(--border-color);
   margin-bottom: 5px;
   font-weight: 900;
 }
 .divLi p {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  bottom: 5px;
   color: var(--color);
   font-size: 1.1rem;
   font-weight: 700;
@@ -223,6 +256,7 @@ ul {
   display: block;
   position: absolute;
   right: 20px;
+  top: 20px;
 }
 .fa-pencil,
 .fa-trash {

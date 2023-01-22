@@ -1,0 +1,33 @@
+#implementações adicionais:
+  
+  ## função de verificação se o usuario não utilizar o javascript no navegador, ele mantem na tela "index.html" pedindo para ativar o javascript
+
+  ## função	 dark/light pelo localStorage, assim aplica em todas as paginas;
+ 
+  ## Tela cadastro:
+      - Validação de se existe ou não o usuario;
+      - verificação com feedback se algum dos campos estiverem vazios;
+      - verificação com feedback se estiver errado o usuario;
+      - função para exibir ou esconder a senha;
+      - css responsivo
+
+  ## Tela Login:
+      - Validaçao com feedback para cada campo se está ou não preenchido corretamente;
+      - verificação com feedback se algum dos campos estiverem vazios;
+      - feedback caso o usuario seja cadastrado;
+      - Validaçao de se existe ou não o usuario;
+      - função para exibir ou esconder a senha;
+      - css responsivo
+
+  ## Tela de tarefas:
+      - animação de loading ao carregar a pagina;
+      - modal responsivo;
+      - botão de logout com modal;
+      - verificação de input caso vazio utiliza modal para alertar usuario;
+      - paginação de 10 em 10 tarefas;
+      - verificação de todas as tarefa, de tarefas realizadas ou tarefas em andamento em cada pagina;
+      - botão de excluir tarefas e botão de exlcuir todas as tarefas utilizando modal;
+      - limite de caracteres em cada input;
+      - função responsiva para mostrar a quantidade de caracteres de cada input;
+
+      //Falta o responsive da tela de tarefas e debugar algumas coisas do codigo para poder otiliza-lo melhor.
