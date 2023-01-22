@@ -20,6 +20,7 @@
       - css responsivo
 
   ## Tela de tarefas:
+      - verificação utilizando token, caso não haja token, o usuario nao pode acessar sem fazer o login;
       - animação de loading ao carregar a pagina;
       - modal responsivo;
       - botão de logout com modal;
