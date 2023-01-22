@@ -33,9 +33,15 @@ if (localStorage.getItem("token") == null) {
 }
 
 function sair() {
-  alerta("Desconectar", "Voce tem certeza que deseja desconectar da pagina?");
+  alerta(
+    "Desconectar",
+    "Voce tem certeza que deseja desconectar da pagina?",
+    "",
+    "Sair"
+  );
   divConfirm.addEventListener("click", (e) => {
-    if (e.target.id == "confirmar") {
+    console.log(e.target.value);
+    if (e.target.value == "Sair") {
       localStorage.removeItem("token");
       localStorage.removeItem("userLogado")((window.location.href = "../"));
     }
@@ -65,15 +71,16 @@ function inserir() {
     alerta(
       "CAMPOS EM BRANCO!",
       "Necessario preenchimento de todos os Campos!!",
-      "none"
+      "none",
+      "confirmar"
     );
   }
 }
 btnDeleteAll.onclick = () => {
   if (userLogado.post.length != 0) {
-    alerta("EXCLUIR", "Deseja excluir todas as tarefas?");
+    alerta("EXCLUIR", "Deseja excluir todas as tarefas?", "", "Excluir Todos");
     divConfirm.addEventListener("click", (e) => {
-      if (e.target.id == "confirmar") {
+      if (e.target.value == "Excluir Todos") {
         userLogado.post.forEach((item) => {
           for (let i = 0; userLogado.post.length > 0; i++) {
             userLogado.post.shift(item);
@@ -83,7 +90,7 @@ btnDeleteAll.onclick = () => {
       updateDB();
     });
   } else {
-    alerta("#ERROR", "Não há nenhum item na lista!!", "none");
+    alerta("#ERROR", "Não há nenhum item na lista!!", "none", "Confirmar");
   }
 };
 function itensLista() {
@@ -105,7 +112,12 @@ function inputTarefa() {
 }
 function setItensDB() {
   if (userLogado.post.length >= 30) {
-    alerta("LIMITE ATINGIDO!", "Limite maximo de 30 tarefas!", "none");
+    alerta(
+      "LIMITE ATINGIDO!",
+      "Limite maximo de 30 tarefas!",
+      "none",
+      "Confirmar"
+    );
     return;
   }
   userLogado.post.push({
@@ -355,15 +367,24 @@ function editarbackground(i) {
   console.log(div);
 }
 function removeItem(i) {
-  alerta("EXCLUIR TAREFA!", "Tem certeza que deseja excluir está tarefa?");
-  let index = i;
-  divConfirm.addEventListener("click", (e) => {
-    console.log(index);
-    if (e.target.id == "confirmar") {
-      userLogado.post.splice(index, 1);
+  alerta(
+    "EXCLUIR TAREFA!",
+    "Tem certeza que deseja excluir está tarefa?",
+    "",
+    "Excluir"
+  );
+  divConfirm.onclick = (e) => {
+    if (e.target.value == "Excluir") {
+      userLogado.post.forEach((recado, index) => {
+        if (recado.tarefa === userLogado.post[i].tarefa) {
+          // console.log(userLogado.post[i]);
+          console.log(index);
+          userLogado.post.splice(recado, 1);
+        }
+      });
       updateDB();
     }
-  });
+  };
 }
 function atualizaUsuario() {
   listaUser.forEach((user) => {
@@ -377,13 +398,13 @@ function loading() {
   carregando.setAttribute("style", "display:none");
   carregado.setAttribute("style", "display:block");
 }
-function alerta(titulo, texto, display) {
+function alerta(titulo, texto, display, i) {
   divConfirm.setAttribute("style", "display: flex");
   let div = document.createElement("div");
   div.innerHTML = `
           <h2 id="tituloAlert">${titulo}</h2>
           <span id="textoAlert">${texto}</span>
-          <input type="button" id='confirmar' value="Confirmar" >
+          <input type="button" id='confirmar' value="${i}" >
           <input type="button" style="display:${display}" id='cancelar' value="Cancelar" >
   `;
   div.setAttribute("class", "content-box");
