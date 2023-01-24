@@ -1,4 +1,4 @@
-![Logo of the project](https://github.com/fuentes71/layout-WEB/blob/feature-developer/public/ScreenShots/Logoreadme.png)
+![Logo of the project](https://github.com/fuentes71/Post-IT/blob/main/Assets/icon.png)
 
 ## POST-IT
  - Este projeto seria a junção de TODO LIST e cadastro de usuario útilizando LocalStorage para guardar as informações.
@@ -28,17 +28,21 @@ Aqui estão as tecnologias utilizadas neste projeto.
 
 ## Como usar:
 
-### 1 - Ao acessar, você verá a página inicial <
+### 1 - Ao acessar, você se depará com está página inicial <
 
-![Homepage imagem]()
+![LoginLight imagem](https://github.com/fuentes71/Post-IT/blob/main/Assets/ScreenShots/login-Light.png)
 
-### 2 - Caso não goste do Light Mode, tem a versão Dark Mode.
+### 2 - Caso não goste do Light Mode, tem a versão Dark Mode... :)
 
-![DarkMode imagem]()
+![DarkMode imagem](https://github.com/fuentes71/Post-IT/blob/main/Assets/ScreenShots/login-dark.png)
 
 ### 3 - Ao acessar a página de Cadastro <<
 
-![Cadastropage imagem]()
+![Cadastropage imagem](https://github.com/fuentes71/Post-IT/blob/main/Assets/ScreenShots/cadastro.png)
+
+### 4 - Está seria a tela após logar.  <
+
+![TodoListpage imagem](https://github.com/fuentes71/Post-IT/blob/main/Assets/ScreenShots/todo-list.png)
 
 
 ## Features
@@ -62,7 +66,8 @@ As principais características do aplicativo são:
 
   ## Autoria
 
-  * **Matheus Fuentes Pereira** 
+  # **Matheus Fuentes Pereira** 
 
-  Siga-me no GitHub e veja mais projetos futuros :)
-  Obrigado pela visita e Bons codigos Dev. <3
+  - Siga-me no GitHub e veja mais projetos futuros :)
+  
+  - Obrigado pela visita e Bons codigos Dev. <3
